@@ -1,8 +1,13 @@
+import { compare } from 'bcrypt';
 import sqlite3 from 'sqlite3';
 
 export interface User {
     name: string;
     password: string;
+}
+
+export interface LoginResponse {
+    success: boolean;
 }
 
 function getPassword(
@@ -21,6 +26,17 @@ function getPassword(
     })
 
     db.close()
+}
+
+export function userLogin(
+    userPassword: string
+): LoginResponse {
+    const password = getPassword('mrluo') // username hardcoded as only one user, Mr. Luo
+    const successValue = compare(userPassword, password)
+
+    return {
+        success: successValue
+    }
 }
 
 export function changePassword(
