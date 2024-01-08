@@ -17,3 +17,18 @@ export function getPassword(
 
     db.close()
 }
+
+export function changePassword(
+    name: string,
+    newPassword: string
+) {
+    let db = new sqlite.Database('./database.db')
+
+    db.run('UPDATE users SET password = ? WHERE name = ?', [newPassword, name], (err) => {
+        if (err) {
+            console.error(err)
+        }
+    })
+    
+    db.close()
+}
