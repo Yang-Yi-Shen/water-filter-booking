@@ -34,7 +34,7 @@ export function makeBooking(
     })
 }
 
-export async function getBookings(
+export function getBookings(
 ):Promise<Booking[]> {
     return new Promise<Booking[]>((resolve, reject) => {
         let db = new sqlite3.Database('./database.db')
