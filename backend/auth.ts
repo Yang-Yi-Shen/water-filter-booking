@@ -1,4 +1,3 @@
-import { compare } from 'bcrypt';
 import sqlite3 from 'sqlite3';
 
 export interface User {
@@ -12,27 +11,30 @@ export interface LoginResponse {
 
 function getPassword(
     name: string
-) {
-    let db = new sqlite3.Database('./database.db')
+): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+        let db = new sqlite3.Database('./database.db')
 
-    // ensure user is in database
-    db.get('SELECT password FROM users WHERE name = ?', [name], (err, row: User) => {
-        if (err) {
-            console.error(err)
-            return
-        }
+        db.get('SELECT password FROM users WHERE name = ?', [name], (err, row: User) => {
+            if (err) {
+                console.error(err)
+                db.close()
+                reject(err)
+                return
+            }
 
-        return row.password
+            const passwordValue = row.password;
+            db.close()
+            resolve(passwordValue)
+        })
     })
-
-    db.close()
 }
 
-export function userLogin(
+export async function userLogin(
     userPassword: string
-): LoginResponse {
-    const password = getPassword('mrluo') // username hardcoded as only one user, Mr. Luo
-    const successValue = compare(userPassword, password)
+): Promise<LoginResponse> {
+    const password = await getPassword('mrluo') // username hardcoded as only one user, Mr. Luo
+    const successValue = (userPassword == password)
 
     return {
         success: successValue
@@ -50,6 +52,6 @@ export function changePassword(
             console.error(err)
         }
     })
-    
+
     db.close()
 }
