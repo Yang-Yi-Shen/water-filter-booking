@@ -21,9 +21,8 @@ function getPassword(
                 return
             }
 
-            const passwordValue = row.password;
+            resolve(row.password);
             db.close()
-            resolve(passwordValue)
         })
     })
 }
