@@ -39,12 +39,12 @@ export async function userLogin(
 }
 
 export function changePassword(
-    name: string,
+    // again, Mr. Luo's username is hardcoded
     newPassword: string
 ) {
     let db = new sqlite3.Database('./database.db')
 
-    db.run('UPDATE users SET password = ? WHERE name = ?', [newPassword, name], (err) => {
+    db.run('UPDATE users SET password = ? WHERE name = ?', [newPassword, 'mrluo'], (err) => {
         if (err) {
             console.error(err)
         }
