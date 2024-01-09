@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { getBookings } from './booking'
+import { getBookings, makeBooking } from './booking'
 import { getEarnings } from './earnings'
 import { changePassword, userLogin } from './auth'
 
@@ -34,12 +34,24 @@ app.post('/userLogin', async (req, res) => {
 // PUT APIs
 app.put('/changePassword', async (req, res) => {
     const newPassword = req.body.newPassword
-    const response = await changePassword(newPassword)
+    const response = changePassword(newPassword)
     res.json({
         data: response
     })
 })
 
+app.put('/makeBooking', async (req, res) => {
+    const timeStart = req.body.timeStart
+    const timeEnd = req.body.timeEnd
+    const revenue = req.body.revenue
+
+    const response = makeBooking(timeStart, timeEnd, revenue)
+    res.json({
+        data: response
+    })
+})
+
+// start backend (fwoosh!)
 app.listen(PORT, () => {
     console.log(`app listening at port ${PORT}`)
 })
