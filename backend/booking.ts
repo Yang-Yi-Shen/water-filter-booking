@@ -1,22 +1,19 @@
 import sqlite3 from "sqlite3";
 
+import { DBResponse } from "./response";
+
 export interface Booking {
     tsart: number; // dates are stored in milliseconds so datatype is number
     tend: number;
     revenue: number; // revenue is calculated depending on services ordered
 }
 
-// look into combining this & LoginResponse into one DBResponse
-interface MakeBookingResponse {
-    success: boolean;
-}
-
 export function makeBooking(
     tsart: number,
     tend: number,
     revenue: number
-): Promise<MakeBookingResponse> {
-    return new Promise<MakeBookingResponse>((resolve, reject) => {
+): Promise<DBResponse> {
+    return new Promise<DBResponse>((resolve, reject) => {
         let db = new sqlite3.Database('./database.db')
 
         db.run('INSERT INTO bookings VALUES(?, ?, ?)', [tsart, tend, revenue], (err) => {

@@ -1,12 +1,10 @@
 import sqlite3 from 'sqlite3';
 
+import { DBResponse } from './response';
+
 export interface User {
     name: string;
     password: string;
-}
-
-export interface LoginResponse {
-    success: boolean;
 }
 
 function getPassword(
@@ -32,7 +30,7 @@ function getPassword(
 
 export async function userLogin(
     userPassword: string
-): Promise<LoginResponse> {
+): Promise<DBResponse> {
     const password = await getPassword('mrluo') // username hardcoded as only one user, Mr. Luo
     const successValue = (userPassword == password)
 
