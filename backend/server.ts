@@ -2,7 +2,7 @@ import express from 'express'
 
 import { getBookings } from './booking'
 import { getEarnings } from './earnings'
-import { userLogin } from './auth'
+import { changePassword, userLogin } from './auth'
 
 const app = express()
 const PORT = 6900
@@ -26,6 +26,15 @@ app.get('/getEarnings', async (req, res) => {
 app.post('/userLogin', async (req, res) => {
     const password = req.body.password
     const response = await userLogin(password)
+    res.json({
+        data: response
+    })
+})
+
+// PUT APIs
+app.put('/changePassword', async (req, res) => {
+    const newPassword = req.body.newPassword
+    const response = await changePassword(newPassword)
     res.json({
         data: response
     })
