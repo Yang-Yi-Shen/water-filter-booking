@@ -7,7 +7,7 @@ export interface Booking {
 }
 
 // look into combining this & LoginResponse into one DBResponse
-export interface MakeBookingResponse {
+interface MakeBookingResponse {
     success: boolean;
 }
 
@@ -22,6 +22,7 @@ export function makeBooking(
         db.run('INSERT INTO bookings VALUES(?, ?, ?)', [tsart, tend, revenue], (err) => {
             if (err) {
                 console.error(err)
+                db.close()
                 reject({
                     success: false
                 })
@@ -32,6 +33,25 @@ export function makeBooking(
             resolve({
                 success: true
             })
+        })
+    })
+}
+
+export async function getBookings(
+):Promise<Booking[]> {
+    return new Promise<Booking[]>((resolve, reject) => {
+        let db = new sqlite3.Database('./database.db')
+
+        db.all('SELECT * FROM bookings',[], (err, rows: Booking[]) => {
+            if (err) {
+                console.error(err)
+                db.close()
+                reject(err)
+                return
+            }
+
+            db.close()
+            resolve(rows)
         })
     })
 }
