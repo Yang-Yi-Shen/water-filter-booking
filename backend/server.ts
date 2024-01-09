@@ -1,6 +1,4 @@
-const express = require('express') // for API development
-const sqlite = require('sqlite3') // for storing booking & revenue data
-const bcrypt = require('bcrypt') // for encrypting Mr. Luo's password
+import express from 'express'
 
 const app = express()
 const PORT = 6900
