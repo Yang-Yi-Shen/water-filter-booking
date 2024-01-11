@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+body {
+  margin: 0px;
+}
+
+* {
+  --font-family-default: 'Libre Baskerville';
+
+  --background-primary: #012A4A;
+  --background-secondary: #013A63;
+  --text-primary: #E3E5E6;
+  --text-secondary: #89C2D9;
+  --highlight: #F5E0B7;
+
+  font-family: var(--font-family-default);
+  background-color: var(--background-primary);
+  color: var(--text-primary)
+}
