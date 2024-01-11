@@ -50,6 +50,8 @@
     margin-top: 10px;
     font-weight: bold;
     transition: 0.25s;
+
+    animation: homepage-btn-slide-up 1.5s cubic-bezier(0, 0.3, 0.3, 1);
 }
 
 .homepage-text-btn:hover {
@@ -61,5 +63,20 @@
     grid-column: 2;
     max-width: 100%;
     border-radius: 15px;
+}
+
+/* animations */
+@keyframes homepage-btn-slide-up {
+    0% {
+        transform: translateY(500px);
+    }
+
+    50% {
+        transform: translateY(500px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 </style>
