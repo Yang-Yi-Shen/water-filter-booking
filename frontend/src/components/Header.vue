@@ -25,6 +25,7 @@ header {
     align-items: center;
 
     background: var(--background-secondary);
+    animation: bounce-in 0.5s ease-out;
 }
 
 header * {
@@ -45,6 +46,7 @@ header * {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     background-color: var(--background-primary);
     color: var(--highlight)
@@ -56,5 +58,16 @@ nav {
     justify-content: right;
     align-items: center;
     gap: 10px;
+}
+
+/* animations */
+@keyframes bounce-in {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
 }
 </style>
