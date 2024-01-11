@@ -12,6 +12,7 @@ body {
   --text-primary: #E3E5E6;
   --text-secondary: #89C2D9;
   --highlight: #F5E0B7;
+  --highlight-secondary: #EFCD8A;
 
   font-family: var(--font-family-default);
   background-color: var(--background-primary);
